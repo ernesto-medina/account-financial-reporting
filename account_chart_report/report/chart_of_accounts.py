@@ -20,7 +20,7 @@
 #
 ###############################################################################
 
-from openerp.report import report_sxw
+from odoo.report import report_sxw
 
 
 class AccountChar(report_sxw.rml_parse):
@@ -35,13 +35,12 @@ class AccountChar(report_sxw.rml_parse):
             "actual_context": context,
         })
 
-    def _get_lst_account(self, cr, uid, account_id, context):
-        account_obj = self.pool['account.account']
-        actual_account = account_obj.browse(cr, uid, account_id,
-                                            context=context)
+    def _get_lst_account(self, cr, uid, company_id, context):
+        account_obj = self.objects.env['account.account']
+        actual_account = account_obj.search([('company_id', '=', company_id)])
         lst_account = []
-        self._fill_list_account_with_child(lst_account, actual_account)
-        return lst_account
+        #self._fill_list_account_with_child(lst_account, actual_account)
+        return actual_account
 
     def _fill_list_account_with_child(self, lst_account, account):
         # no more child

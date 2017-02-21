@@ -20,19 +20,18 @@
 #
 ##############################################################################
 
-from openerp import fields, models, api
+from odoo import fields, models, api
 
 
 class ChartOfAccountsReport(models.TransientModel):
     _name = 'account.print.chart.accounts.report'
     _description = 'Chart of accounts Report'
 
-    chart_account_id = fields.Many2one(
-        'account.account',
-        'Chart of Accounts',
-        help='Select Charts of Accounts',
-        required=True,
-        domain=([('parent_id', '=', False)]))
+    company_id = fields.Many2one(
+        'res.company',
+        'Company',
+        help='Select Company of Accounts',
+        required=True)
 
     @api.multi
     def print_report(self, data):

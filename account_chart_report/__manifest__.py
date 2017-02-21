@@ -36,6 +36,6 @@
         'account_report.xml',
         'wizard/account_report_chart_of_account.xml',
     ],
-    'installable': False,
+    'installable': True,
     'auto_install': False,
 }
